@@ -6,6 +6,7 @@ Make sure you install and get neo4j running as is described in my video on Canva
 Once you get neo4j running, please create a new project with a new local DBMS. Make sure you also install the APOC plugin.
 
 # Python setup
+
 ```
 sudo apt-get install software-properties-common
 
