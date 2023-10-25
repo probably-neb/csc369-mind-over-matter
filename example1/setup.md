@@ -6,7 +6,7 @@ Make sure you install and get neo4j running as is described in my video on Canva
 Once you get neo4j running, please create a new project with a new local DBMS. Make sure you also install the APOC plugin.
 
 # Python setup
-``
+```
 sudo apt-get install software-properties-common
 
 sudo add-apt-repository ppa:deadsnakes/ppa
@@ -24,9 +24,10 @@ wget https://bootstrap.pypa.io/get-pip.py
 sudo python3.9 ./get-pip.py
 
 sudo python3.9 -m pip install virtualenv
-``
+```
 
-virtualenv --py `which python3.9` spacey_pipeline
+```
+virtualenv --py \`which python3.9\` spacey_pipeline
 
 source spacey_pipeline/bin/activate
 
@@ -41,5 +42,6 @@ pip install transformers==4.18.0
 python -m spacy download en_core_web_sm
 
 python -m ipykernel install --user --name spacey_pipeline
+```
 
 Now you can start jupyter lab and run the kernel called spacey_pipeline.
