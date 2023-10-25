@@ -28,7 +28,7 @@ sudo python3.9 -m pip install virtualenv
 ```
 
 ```
-virtualenv --py \`which python3.9\` spacey_pipeline
+virtualenv --py `which python3.9` spacey_pipeline
 
 source spacey_pipeline/bin/activate
 
