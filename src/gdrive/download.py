@@ -2,6 +2,8 @@
 Downloads files from Google Drive given the url to a folder.
 """
 
+# TODO: Copy code from gdrive repo https://github.com/wkentaro/gdown/blob/main/gdown/download_folder.py and use private _get_directory_structure function for parallel downloads
+
 def _parse_id_from_url(url: str):
     """
     The file id is the key to downloading any file from Google Drive.
@@ -18,4 +20,8 @@ def download_folder(url: str, out_dir: str):
     import gdown
     gdown.download_folder(url, quiet=False)
 
-# TODO: Copy code from gdrive repo https://github.com/wkentaro/gdown/blob/main/gdown/download_folder.py and use private _get_directory_structure function for parallel downloads
+
+# for testing
+if __name__ == "__main__":
+    DEFAULT_GDRIVE_URL = "https://drive.google.com/drive/folders/1O2u80vRUtE7VDIFb0azd0WJ1a0INOhMM"
+    download_folder(DEFAULT_GDRIVE_URL, None)
