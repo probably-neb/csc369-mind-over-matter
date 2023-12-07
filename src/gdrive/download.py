@@ -24,4 +24,9 @@ def download_folder(url: str, out_dir: str):
 # for testing
 if __name__ == "__main__":
     DEFAULT_GDRIVE_URL = "https://drive.google.com/drive/folders/1O2u80vRUtE7VDIFb0azd0WJ1a0INOhMM"
-    download_folder(DEFAULT_GDRIVE_URL, None)
+    from pathlib import Path
+    out_dir = Path("./data/gdrive")
+    if not out_dir.exists():
+        print("Creating directory for Google Drive database at ./gdrive")
+        out_dir.mkdir()
+    download_folder(DEFAULT_GDRIVE_URL, out_dir)

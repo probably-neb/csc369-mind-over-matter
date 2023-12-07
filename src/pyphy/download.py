@@ -34,7 +34,7 @@ def download_latest_ncbi_db(out_dir: str):
 
 # for testing
 if __name__ == "__main__":
-    out_dir = Path("./ncbi")
+    out_dir = Path("./data/ncbi")
     if not out_dir.exists():
         print("Creating directory for NCBI database at ./ncbi")
         out_dir.mkdir()
