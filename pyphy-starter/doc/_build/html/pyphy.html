@@ -1,0 +1,403 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>pyphy module &mdash; pyphy 1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> pyphy
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">pyphy module</a></li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">pyphy</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>pyphy module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/pyphy.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-pyphy">
+<span id="pyphy-module"></span><h1>pyphy module<a class="headerlink" href="#module-pyphy" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="pyphy.getAllNameByTaxid">
+<code class="sig-prename descclassname">pyphy.</code><code class="sig-name descname">getAllNameByTaxid</code><span class="sig-paren">(</span><em class="sig-param">taxid</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyphy.html#getAllNameByTaxid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyphy.getAllNameByTaxid" title="Permalink to this definition">¶</a></dt>
+<dd><p>get taxonomic names and synonyms given a taxid</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>taxid</strong> (<em>str</em><em> or </em><em>int</em>) – query taxid</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>return a list taxonomic names and synonyms if it is found otherwise unknown</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyphy.getAllSonsByTaxid">
+<code class="sig-prename descclassname">pyphy.</code><code class="sig-name descname">getAllSonsByTaxid</code><span class="sig-paren">(</span><em class="sig-param">taxid</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyphy.html#getAllSonsByTaxid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyphy.getAllSonsByTaxid" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the sons of all levels given a taxid</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>taxid</strong> (<em>str</em><em> or </em><em>int</em>) – query taxid</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>return a list of son taxid if it is found otherwise an empty list</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyphy.getDictPathByTaxid">
+<code class="sig-prename descclassname">pyphy.</code><code class="sig-name descname">getDictPathByTaxid</code><span class="sig-paren">(</span><em class="sig-param">taxid</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyphy.html#getDictPathByTaxid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyphy.getDictPathByTaxid" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the taxonomic path with the ranks as keys given a taxid</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>taxid</strong> (<em>str</em><em> or </em><em>int</em>) – query taxid</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>return a dict of rank: parent taxid if it is found otherwise an empty dict</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyphy.getNameByTaxid">
+<code class="sig-prename descclassname">pyphy.</code><code class="sig-name descname">getNameByTaxid</code><span class="sig-paren">(</span><em class="sig-param">taxid</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyphy.html#getNameByTaxid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyphy.getNameByTaxid" title="Permalink to this definition">¶</a></dt>
+<dd><p>get taxonomic name given a taxid</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>taxid</strong> (<em>str</em><em> or </em><em>int</em>) – query taxid</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>return a taxonomic name if it is found otherwise unknown</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyphy.getParentByName">
+<code class="sig-prename descclassname">pyphy.</code><code class="sig-name descname">getParentByName</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">synonym=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyphy.html#getParentByName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyphy.getParentByName" title="Permalink to this definition">¶</a></dt>
+<dd><p>get parent taxid given a taxonomic name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – query name</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>return the parent taxid if it is found otherwise unknown</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyphy.getParentByTaxid">
+<code class="sig-prename descclassname">pyphy.</code><code class="sig-name descname">getParentByTaxid</code><span class="sig-paren">(</span><em class="sig-param">taxid</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyphy.html#getParentByTaxid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyphy.getParentByTaxid" title="Permalink to this definition">¶</a></dt>
+<dd><p>get parent taxid given a taxid</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>taxid</strong> (<em>str</em><em> or </em><em>int</em>) – query taxid</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>return the parent taxid if it is found otherwise unknown</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyphy.getPathByTaxid">
+<code class="sig-prename descclassname">pyphy.</code><code class="sig-name descname">getPathByTaxid</code><span class="sig-paren">(</span><em class="sig-param">taxid</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyphy.html#getPathByTaxid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyphy.getPathByTaxid" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the taxonomic path given a taxid</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>taxid</strong> (<em>str</em><em> or </em><em>int</em>) – query taxid</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>return a list of parent taxid if it is found otherwise an empty list</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyphy.getRankByName">
+<code class="sig-prename descclassname">pyphy.</code><code class="sig-name descname">getRankByName</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">synonym=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyphy.html#getRankByName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyphy.getRankByName" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the rank given a taxonomic name or a synonym</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – query taxonomic name</p></li>
+<li><p><strong>synonym</strong> (<em>bool</em><em>, </em><em>optional</em>) – should a synonym search be performed</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the rank of the name if found otherwise no_rank</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyphy.getRankByTaxid">
+<code class="sig-prename descclassname">pyphy.</code><code class="sig-name descname">getRankByTaxid</code><span class="sig-paren">(</span><em class="sig-param">taxid</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyphy.html#getRankByTaxid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyphy.getRankByTaxid" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the rank given a taxid</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>taxid</strong> (<em>int</em><em> or </em><em>str</em>) – query taxid</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the rank of the taxid</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyphy.getSonsByName">
+<code class="sig-prename descclassname">pyphy.</code><code class="sig-name descname">getSonsByName</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">synonym=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyphy.html#getSonsByName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyphy.getSonsByName" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the 1st-level sons given a taxonomic name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – query name</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>return a list of son taxid if it is found otherwise an empty list</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyphy.getSonsByTaxid">
+<code class="sig-prename descclassname">pyphy.</code><code class="sig-name descname">getSonsByTaxid</code><span class="sig-paren">(</span><em class="sig-param">taxid</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyphy.html#getSonsByTaxid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyphy.getSonsByTaxid" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the 1st-level sons given a taxid</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>taxid</strong> (<em>str</em><em> or </em><em>int</em>) – query taxid</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>return a list of son taxid if it is found otherwise an empty list</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyphy.getTaxidByName">
+<code class="sig-prename descclassname">pyphy.</code><code class="sig-name descname">getTaxidByName</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">limit=1</em>, <em class="sig-param">synonym=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyphy.html#getTaxidByName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyphy.getTaxidByName" title="Permalink to this definition">¶</a></dt>
+<dd><p>get taxid given a taxonomic name or a synonym</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – query taxonomic name</p></li>
+<li><p><strong>limit</strong> (<em>int</em><em>, </em><em>optional</em>) – how many taxid to return</p></li>
+<li><p><strong>synonym</strong> (<em>bool</em><em>, </em><em>optional</em>) – should a synonym search be performed</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>return a list of taxid if the name is found otherwise a list of unknown</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Sixing Huang
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
