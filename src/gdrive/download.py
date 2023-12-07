@@ -6,10 +6,10 @@ Downloads files from Google Drive given the url to a folder.
 from pathlib import Path
 import gdown
 from sys import stderr
-import fitz # pyMuPDF
 
 def download_file(id: str, output: str, quiet=False):
     gdown.download(id=id, output=output, quiet=quiet)
+
 
 def download_folder(url: str, out_dir: str, quiet=False):
     out_dir = Path(out_dir)
@@ -19,6 +19,7 @@ def download_folder(url: str, out_dir: str, quiet=False):
         out_path = str(out_dir / filename)
         download_file(id, out_path, quiet=quiet)
         created.append(out_path)
+
     return created
 
 
@@ -55,7 +56,6 @@ def list_files_in_folder(url: str, quiet=False, proxy=None, use_cookies=True, re
             print(file.name, file=stderr)
         file_ids.append((file.name, file.id))
     return file_ids
-
 
 # for testing
 if __name__ == "__main__":
