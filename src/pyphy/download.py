@@ -38,4 +38,4 @@ if __name__ == "__main__":
     if not out_dir.exists():
         print("Creating directory for NCBI database at ./ncbi")
         out_dir.mkdir()
-    download_latest_ncbi_db("./ncbi")
+    download_latest_ncbi_db(out_dir)
