@@ -1,9 +1,18 @@
 # MIND OVER MATTER
 
-## Keys
+## KEYS
 
-Chrome remote desktop
-: `856768979`
+Chrome remote desktop (mindovermatter3)
+: `934051`
 
-Backup Azure Server (can be ssh'd into)
-: Either run `./s.sh` or copy the [key](mindovermatter.pem) locally and run `ssh -i ./mindovermatter.pem azureuser@20.150.209.209`
+## USAGE
+
+#### DOWNLOADS
+
+Each module in `src` has a file named `download.py`
+
+These files have `if __name__ == __main__` blocks with code to run the download so can be ran with
+
+```
+python src/{module}/download.py
+```
