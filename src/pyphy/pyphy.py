@@ -382,4 +382,3 @@ def getAllSonsByTaxid(taxid):
     
 if __name__ == '__main__':
     pass
-    
