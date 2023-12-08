@@ -1,15 +1,28 @@
 import fitz # pyMuPDF
+import re
+
+PAGE_NUM_RGX = re.compile(r"\n\d+\n")
 
 def pdf_to_text(pdf_path: str):
     with fitz.open(pdf_path) as pdf:
         pages = [page.get_text() for page in pdf]
     return "\n".join(pages)
 
+
+def clean_text(txt: str):
+    # just remove page numbers for now...
+    return PAGE_NUM_RGX.sub("\n", txt)
+    # possible additions:
+    # - replace abbreviations (HD -> Huntington's disease)
+    # - remove single letter words
+
+
 def parse_dir(path: str):
     txt_files = []
     for pdf in path.glob("*.pdf"):
         pdf = str(pdf) # convert from pathlib.Path
         txt_content = pdf_to_text(pdf)
+        txt_content = clean_text(txt_content)
     
         # TODO: 
         # - clean up txt_content
