@@ -149,7 +149,7 @@ class RebelComponent:
 DEVICE = -1 # Number of the GPU, -1 if want to use CPU
 
 # Add coreference resolution model
-coref = spacy.load('en_core_web_sm', disable=['ner', 'tagger', 'parser', 'attribute_ruler', 'lemmatizer'])
+coref = spacy.load('en_core_web_lg', disable=['ner', 'tagger', 'parser', 'attribute_ruler', 'lemmatizer'])
 coref.add_pipe(
     "xx_coref", config={"chunk_size": 2500, "chunk_overlap": 2, "device": DEVICE})
 
@@ -163,17 +163,17 @@ rel_ext.add_pipe("rebel", config={
 ```
 
 ::: {.output .stream .stderr}
-    Some weights of the model checkpoint at nreimers/mMiniLMv2-L12-H384-distilled-from-XLMR-Large were not used when initializing XLMRobertaModel: ['lm_head.dense.bias', 'lm_head.bias', 'lm_head.layer_norm.weight', 'lm_head.layer_norm.bias', 'lm_head.dense.weight']
+    [nltk_data] Downloading package omw-1.4 to /home/myuser/nltk_data...
+    [nltk_data]   Package omw-1.4 is already up-to-date!
+    Some weights of the model checkpoint at nreimers/mMiniLMv2-L12-H384-distilled-from-XLMR-Large were not used when initializing XLMRobertaModel: ['lm_head.dense.bias', 'lm_head.bias', 'lm_head.layer_norm.bias', 'lm_head.layer_norm.weight', 'lm_head.dense.weight']
     - This IS expected if you are initializing XLMRobertaModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
     - This IS NOT expected if you are initializing XLMRobertaModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
-    Some weights of XLMRobertaModel were not initialized from the model checkpoint at nreimers/mMiniLMv2-L12-H384-distilled-from-XLMR-Large and are newly initialized: ['roberta.pooler.dense.bias', 'roberta.pooler.dense.weight']
+    Some weights of XLMRobertaModel were not initialized from the model checkpoint at nreimers/mMiniLMv2-L12-H384-distilled-from-XLMR-Large and are newly initialized: ['roberta.pooler.dense.weight', 'roberta.pooler.dense.bias']
     You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
-    /home/myuser/spacey_pipeline3/lib/python3.9/site-packages/allennlp/models/archival.py:325: UserWarning: The model models/crosslingual-coreference/minilm/model.tar.gz was trained on a newer version of AllenNLP (v2.9.3), but you're using version 2.10.1.
-      warnings.warn(
 :::
 
 ::: {.output .execute_result execution_count="4"}
-    <__main__.RebelComponent at 0x7f4670319220>
+    <__main__.RebelComponent at 0x7f69c3b627a0>
 :::
 :::
 
@@ -216,11 +216,25 @@ driver.get_server_info()
 ```
 
 ::: {.output .execute_result execution_count="7"}
-    <neo4j.api.ServerInfo at 0x7f46043e46a0>
+    <neo4j.api.ServerInfo at 0x7f6820f11cf0>
 :::
 :::
 
-::: {#4f88283c .cell .code execution_count="8"}
+::: {#1f25a20f-fcd0-47c0-afb4-a3c40796f633 .cell .code execution_count="8"}
+``` python
+import glob
+import json
+DIR="groups"
+for file in glob.glob(DIR+"/*.txt"):
+    record = {}
+    record['title'] = file.split("/")[-1]
+    content = open(file).read()
+    record['text'] = content
+    open(file+".json","w").write(json.dumps(record))
+```
+:::
+
+::: {#4f88283c .cell .code execution_count="11"}
 ``` python
 import_query = """
 UNWIND $data AS row
@@ -251,14 +265,17 @@ def store_content(file):
     file_id = file.split("/")[-1].split(".")[0]
     f = open(file)
     doc = json.load(f)
-    input_text = doc["text"]
-    print(input_text[:100])
-    coref_text = coref(input_text)._.resolved_text
-    doc = rel_ext(coref_text)
-    params = [rel_dict for value, rel_dict in doc._.rel.items()]
-    for p in params:
-        p['file_id']=file_id
-    run_query(import_query, {'data': params})
+    for input_text in doc["text"].split("\n\n"):
+        print(input_text[:100])
+        coref_text = coref(input_text)._.resolved_text
+        try:
+            doc = rel_ext(coref_text)
+            params = [rel_dict for value, rel_dict in doc._.rel.items()]
+            for p in params:
+                p['file_id']=file_id
+            run_query(import_query, {'data': params})
+        except:
+            print("Failed")
     #except Exception as e:
     #  print(f"Couldn't parse text for {page} due to {e}")
 ```
@@ -267,22 +284,22 @@ def store_content(file):
 ::: {#2e54805f .cell .code execution_count="9"}
 ``` python
 import glob
-DIR="domains"
 files = glob.glob(DIR + '/*.json')
 files
 ```
 
 ::: {.output .execute_result execution_count="9"}
-    ['domains/d5.txt.json',
-     'domains/d6.txt.json',
-     'domains/d1.txt.json',
-     'domains/d2.txt.json',
-     'domains/d4.txt.json',
-     'domains/d3.txt.json']
+    ['groups/Save_the_Colon.txt.json',
+     'groups/last_hurrah.txt.json',
+     'groups/Pancreas_Pain.txt.json',
+     'groups/Xs_Os.txt.json',
+     'groups/Mind_Over_Matter.txt.json',
+     'groups/Oops_Computer_Died.txt.json',
+     'groups/Heat_It_And_Weep.txt.json']
 :::
 :::
 
-::: {#f01c91b2 .cell .code execution_count="10"}
+::: {#f01c91b2 .cell .code execution_count="15"}
 ``` python
 for file in files:
     print(f"Parsing {file}")
@@ -290,25 +307,26 @@ for file in files:
 ```
 
 ::: {.output .stream .stdout}
-    Parsing domains/d5.txt.json
-    Familial Attributes
-
-    Genetic and environmental conditions shared in families may contribute to the d
-    Parsing domains/d6.txt.json
-    Central Schema Attributes
-
-    Many factors determine how pain signals from the periphery are transforme
+    Parsing groups/Mind_Over_Matter.txt.json
+    Huntington’s disease (HD) is an autosomal neurodegenerative disease characterized by an excessive nu
+    Huntington’s disease (HD) is a dominantly inherited progressive neurological disorder characterized 
+    Huntington’s disease (HD) is a neurodegenerative disorder caused by a CAG expansion in the HD gene, 
+    Huntington’s disease (HD) is an inherited, progressive neurodegenerative disorder characterized by c
+    Huntington’s disease is a late-onset neurodegenerative disorder caused by a CAG trinucleotide repeat
+    Huntington’s disease (HD) is an autosomal dominant progressive brain disorder resulting from a patho
+    This clinical update review focuses on managing neuropsychiatric manifestations in Huntington’s dise
+    Huntington’s disease (HD) is the most common inherited neurodegenerative disorder, characterized by 
+    Huntington’s disease is a hereditary neurodegenerative disorder causing gradual loss of movement con
+    Therapeutic decision-making in Huntington’s disease (HD) relies heavily on clinical experience due t
+    Huntington’s disease is a progressive, fatal, neurodegenerative disorder caused by an expanded CAG r
+    Huntington’s disease (HD) is an autosomal dominantly inherited neurodegenerative disease marked by p
+    Tetrabenazine (TBZ), initially developed for schizophrenia, has proven useful for hyperkinetic movem
+    The landscape of treatments for chronic neurodegenerative disorders has expanded, with a shift from 
+    Huntington’s disease (HD) poses a significant challenge for therapeutic interventions, with limited 
+:::
 :::
 
-::: {.output .stream .stderr}
-    /home/myuser/spacey_pipeline3/lib/python3.9/site-packages/allennlp/modules/token_embedders/pretrained_transformer_embedder.py:385: UserWarning: __floordiv__ is deprecated, and its behavior will change in a future version of pytorch. It currently rounds toward 0 (like the 'trunc' function NOT 'floor'). This results in incorrect rounding for negative values. To keep the current behavior, use torch.div(a, b, rounding_mode='trunc'), or for actual floor division, use torch.div(a, b, rounding_mode='floor').
-      num_effective_segments = (seq_lengths + self._max_length - 1) // self._max_length
-
-    KeyboardInterrupt
-:::
-:::
-
-::: {#cab1a517 .cell .code execution_count="26" scrolled="true"}
+::: {#cab1a517 .cell .code execution_count="12" scrolled="true"}
 ``` python
 
 run_query("""
@@ -336,7 +354,7 @@ CALL apoc.periodic.iterate("
      
 ```
 
-::: {.output .execute_result execution_count="26"}
+::: {.output .execute_result execution_count="12"}
 ```{=html}
 <div>
 <style scoped>
@@ -374,19 +392,19 @@ CALL apoc.periodic.iterate("
   <tbody>
     <tr>
       <th>0</th>
-      <td>243</td>
-      <td>243</td>
-      <td>35</td>
-      <td>196</td>
-      <td>47</td>
-      <td>47</td>
+      <td>636</td>
+      <td>636</td>
+      <td>79</td>
+      <td>525</td>
+      <td>111</td>
+      <td>111</td>
       <td>0</td>
       <td>{'Cannot merge the following node because of n...</td>
-      <td>{'total': 243, 'committed': 196, 'failed': 47,...</td>
-      <td>{'total': 243, 'committed': 196, 'failed': 47,...</td>
+      <td>{'total': 636, 'errors': {'org.neo4j.graphdb.Q...</td>
+      <td>{'total': 636, 'errors': {'Cannot merge the fo...</td>
       <td>False</td>
       <td>{}</td>
-      <td>{'nodesDeleted': 0, 'labelsAdded': 114, 'relat...</td>
+      <td>{'relationshipsDeleted': 0, 'relationshipsCrea...</td>
     </tr>
   </tbody>
 </table>
