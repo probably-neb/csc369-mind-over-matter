@@ -70,7 +70,7 @@ def process_names_dmp(names_dmp: str):
 def process_nodes_dmp(nodes_dmp: str):
 
     if not nodes_dmp.exists():
-        raise FileNotFoundError(f"names.dmp not found at {names_dmp}")
+        raise FileNotFoundError(f"names.dmp not found at {nodes_dmp}")
     # parents and ranks
     pr = {}
 
