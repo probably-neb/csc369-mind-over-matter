@@ -1,11 +1,22 @@
-FROM python:3.8
+# Instructions to get this to work :)
+FROM rayproject/ray:latest-py39
 
-WORKDIR /app
+RUN pip install -U spacy
 
-COPY requirements.txt /app/
 
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+RUN pip install transformers pandas neo4j spacy-transformers
 
-COPY . /app
+# Pre download the Babelscape model
+RUN python3.9 -c "from transformers import pipeline; model = pipeline('text2text-generation', model='Babelscape/rebel-large', tokenizer='Babelscape/rebel-large')"
 
-CMD ["python", "your_python_script.py"]
+RUN python3.9 -m spacy download en_core_web_lg
+RUN python3.9 -m spacy download en_core_web_sm
+
+WORKDIR /example1
+
+COPY ["./Mind_Over_Matter.txt.json","./main.py", "."]
+
+EXPOSE 8888
+
+CMD ["python3.9", "main.py", "--files", "./Mind_Over_Matter.txt.json", "--host", "bolt://neo4j:7687", "--user", "neo4j", "--password", "1234678"]

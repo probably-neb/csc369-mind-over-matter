@@ -1,31 +1,27 @@
 # MIND OVER MATTER
 
-## KEYS
+### PACKAGE USAGE
 
-Chrome remote desktop (mindovermatter3)
-: `934051`
+1. clone the repo
 
-## USAGE
-
-### MODULES
-
-- pyphy
-    * [url](https://github.com/dgg32/pyphy)
-- ncbi
-    * [url](https://ftp.ncbi.nlm.nih.gov/pub/taxonomy/)
-- kegg
-    * [url](https://www.kegg.jp/kegg/rest/keggapi.html)
-
-#### DOWNLOADS
-
-Each module in `src` has a file named `download.py`
-
-These files have `if __name__ == __main__` blocks with code to run the download so can be ran with
+2. In the root directory either install the necessary requirements like so
 
 ```
-python src/{module}/download.py
+pip install -r requirements.txt
 ```
 
-## ETC
+After setting up a virtual environment of your choosing of course.
 
-- [example knowledge graph](https://files.slack.com/files-tmb/T05SE6YS7E2-F0692UV2MEH-b30ca70398/image_720.png)
+Afterwords the options for the program may be observed like so
+
+```
+python main.py --help
+```
+
+All files passed to the package using the `--files` flag must be in json format.
+
+Alternatively, a neo4j instance and the package can be run with the following command
+
+```
+docker compose build && docker compose up
+```
