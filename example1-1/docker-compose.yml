@@ -1,0 +1,44 @@
+version: "3.8"
+
+services:
+    neo4j:
+        image: neo4j:latest
+        container_name: neo4j-container
+        environment:
+            - NEO4J_AUTH=neo4j/12345678
+            - NEO4J_apoc_export_file_enabled=true
+            - NEO4J_apoc_import_file_enabled=true
+            - NEO4J_apoc_import_file_use__neo4j__config=true
+            - NEO4JLABS_PLUGINS=["apoc"]
+            - NEO4J_dbms_security_procedures_whitelist=apoc.*
+            - NEO4J_dbms_security_procedures_unrestricted=apoc.*
+        ports:
+            - "7474:7474"
+            - "7687:7687"
+
+    jupyter:
+        build:
+            context: .
+            dockerfile: Dockerfile.jupyter
+        shm_size: "4.79gb"
+        container_name: jupyter-container
+        ports:
+            - "8888:8888"
+        profiles:
+            - "jupyter"
+
+    groups_py:
+        build:
+            context: .
+            dockerfile: Dockerfile.python
+        develop:
+            watch:
+              - action: rebuild
+                path: ./Groups.py
+        depends_on:
+          - neo4j
+        shm_size: "4.79gb"
+        ports:
+            - "8888:8888"
+        profiles:
+            - "python"

@@ -1,0 +1,69 @@
+# Instructions to get this to work :)
+FROM rayproject/ray:latest-py39
+
+# Prelminaries
+# Make sure you install and get neo4j running as is described in my video on Canvas.
+
+# Once you get neo4j running, please create a new project with a new local DBMS. Make sure you also install the APOC plugin.
+
+# Python setup
+
+# RUN apt upgrade && apt-get -y --no-install-recommends update
+
+# RUN apt-get -y install software-properties-common
+
+# RUN apt-get -y install update
+#
+# RUN apt-get -y install wget
+
+# NOTE: no need to create venv in docker
+# RUN python3.9 -m pip install virtualenv
+# RUN virtualenv --py `which python3.9` spacey_pipeline
+# RUN source spacey_pipeline/bin/activate
+
+# RUN pip3.9 install --upgrade pip
+
+# RUN apt-get -y install make g++
+
+# For some reason running these all in the same pip install fails
+# RUN pip install jupyter
+# RUN pip install notebook==6.*
+# RUN pip install crosslingual-coreference==0.2.3
+# RUN python3.9 -m spacy download en_core_web_sm
+# RUN python3.9 -m spacy download en_core_web_lg
+
+# RUN pip install numpy
+# RUN pip install spacy-transformers==1.1.5
+# RUN pip install wikipedia
+# RUN pip install neo4j
+# RUN pip install transformers==4.18.0
+RUN pip install -U spacy
+
+RUN python3.9 -m spacy download en_core_web_sm
+
+RUN pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+RUN pip install transformers pandas neo4j spacy-transformers
+
+# Pre download the Babelscape model
+RUN python3.9 -c "from transformers import pipeline; model = pipeline('text2text-generation', model='Babelscape/rebel-large', tokenizer='Babelscape/rebel-large')"
+
+# RUN python3.9 -m ipykernel install --user --name spacey_pipeline
+
+# Now you can start jupyter lab and run the kernel called spacey_pipeline.
+
+WORKDIR /example1
+
+COPY ["Small Example1.ipynb", "."]
+
+COPY ["domains/", "domains"]
+
+COPY ["groups/", "groups"]
+
+COPY ["Groups.py", "."]
+
+EXPOSE 8888
+
+# CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root", "--NotebookApp.token=''", "--NotebookApp.password=''"]
+
+CMD ["python3.9", "Groups.py"]
+
